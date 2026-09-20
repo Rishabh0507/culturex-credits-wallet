@@ -6,6 +6,7 @@ import { WalletBalance } from './walletBalance';
 import { WalletLedger } from './walletLedger';
 import { Payment } from './payment';
 import { ProcessedStripeEvent } from './processedStripeEvent';
+import { Campaign } from './campaign';
 
 // Associations
 Currency.hasMany(CurrencyPlan, { foreignKey: 'currency_id', as: 'plans' });
@@ -23,4 +24,7 @@ User.hasMany(Payment, { foreignKey: 'user_id', as: 'payments' });
 Payment.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
 Payment.belongsTo(Currency, { foreignKey: 'currency_id', as: 'currency' });
 
-export { sequelize, User, Currency, CurrencyPlan, WalletBalance, WalletLedger, Payment, ProcessedStripeEvent };
+User.hasMany(Campaign, { foreignKey: 'user_id', as: 'campaigns' });
+Campaign.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+
+export { sequelize, User, Currency, CurrencyPlan, WalletBalance, WalletLedger, Payment, ProcessedStripeEvent, Campaign };
